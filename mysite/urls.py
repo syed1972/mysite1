@@ -16,10 +16,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
      # 127.0.0.1:8000
-    path('', include('blog.urls'))
+    path('', include('blog.urls')),
+
+    # 127.0.0.1:8000/accounts/login --> local
+    # mydjangosite.com/accounts/login --> online
+    # path('accounts/login/', auth_views.login, name='login'),
+
+    path('accounts/login/', LoginView.as_view(), name='login'),
+
+     # 127.0.0.1:8000/accounts/logout --> local
+    # mydjangosite.com/accounts/logout --> online
+    # path('accounts/logout/', view=auth_views.logout, name='logout', kwargs={'next_page': 'post_list'}),
+
+    path('accounts/logout/', view=LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
