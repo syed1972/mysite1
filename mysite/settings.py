@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
