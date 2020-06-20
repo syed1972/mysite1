@@ -4,6 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+
+
+
 
 # Create your views here.
 def post_list(request):
@@ -23,7 +28,7 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -43,7 +48,7 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
